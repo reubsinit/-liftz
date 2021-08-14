@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Routine } from 'src/model/routine/entities/routine.entity';
 
 @Entity()
 export class Exercise {
@@ -7,4 +8,7 @@ export class Exercise {
 
   @Column()
   name: string;
+
+  @ManyToMany(() => Routine, (routine: Routine) => routine.exercises)
+  routines: Routine[];
 }

@@ -1,3 +1,1 @@
-export class CreateExerciseDto {
-  name: string;
-}
+export class CreateExerciseDto {}

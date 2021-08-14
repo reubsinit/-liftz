@@ -5,25 +5,25 @@ import { Exercise } from './entities/exercise.entity';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 
 @Injectable()
-export class ExercisesService {
+export class ExerciseService {
   constructor(
     @InjectRepository(Exercise)
-    private exercisesRepository: Repository<Exercise>,
+    private exerciseRepository: Repository<Exercise>,
   ) {}
 
   async create(createExerciseDto: CreateExerciseDto): Promise<Exercise> {
-    return await this.exercisesRepository.save(createExerciseDto);
+    return await this.exerciseRepository.save(createExerciseDto);
   }
 
   findAll(): Promise<Exercise[]> {
-    return this.exercisesRepository.find();
+    return this.exerciseRepository.find({ relations: ['routines'] });
   }
 
   findOne(id: string): Promise<Exercise> {
-    return this.exercisesRepository.findOne(id);
+    return this.exerciseRepository.findOne(id);
   }
 
   async remove(id: string): Promise<void> {
-    await this.exercisesRepository.delete(id);
+    await this.exerciseRepository.delete(id);
   }
 }

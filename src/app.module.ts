@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Exercise } from './model/exercise/entities/exercise.entity';
-import { ExercisesModule } from './model/exercise/exercises.module';
+import { ExerciseModule } from './model/exercise/exercise.module';
+import { RoutineModule } from './model/routine/routine.module';
 
 @Module({
   imports: [
@@ -13,10 +13,11 @@ import { ExercisesModule } from './model/exercise/exercises.module';
       password: '&fdsknj!sdfnj_3NB',
       database: 'liftz_db',
       logging: true,
-      entities: ['dist/**/**.entity{.ts,.js}'],
+      autoLoadEntities: true,
       synchronize: true,
     }),
-    ExercisesModule,
+    ExerciseModule,
+    RoutineModule,
   ],
 })
 export class AppModule {}

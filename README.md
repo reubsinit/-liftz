@@ -32,6 +32,14 @@
 $ npm install
 ```
 
+### DB
+- Create the user
+`create user liftz_user with password '&fdsknj!sdfnj_3NB';`
+
+- Create the db
+`create database liftz_db owner liftz_user;`
+
+
 ## Running the app
 
 ```bash

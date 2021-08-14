@@ -12,7 +12,7 @@ export class ExercisesService {
   ) {}
 
   async create(createExerciseDto: CreateExerciseDto): Promise<Exercise> {
-    return await this.exercisesRepository.create(createExerciseDto);
+    return await this.exercisesRepository.save(createExerciseDto);
   }
 
   findAll(): Promise<Exercise[]> {

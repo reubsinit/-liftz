@@ -3,8 +3,8 @@ import { Routine } from 'src/model/routine/entities/routine.entity';
 
 @Entity()
 export class Exercise {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;

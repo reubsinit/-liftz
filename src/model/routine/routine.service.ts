@@ -20,7 +20,7 @@ export class RoutineService {
   }
 
   async onUpdateOfExercises(
-    id: number,
+    id: string,
     updateRoutineDto: UpdateRoutineDto,
   ): Promise<Routine> {
     const routine = await this.routineRepository.findOne(id);
@@ -37,7 +37,7 @@ export class RoutineService {
   }
 
   async update(
-    id: number,
+    id: string,
     updateRoutineDto: UpdateRoutineDto,
   ): Promise<Routine | UpdateResult> {
     if (updateRoutineDto.exercises) {
@@ -59,7 +59,7 @@ export class RoutineService {
     return this.routineRepository.findOne(id);
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     await this.routineRepository.delete(id);
   }
 }

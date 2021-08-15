@@ -27,14 +27,14 @@ export class ExerciseController {
 
   @Patch(':id')
   update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() updateExerciseDto: UpdateExerciseDto,
   ) {
-    return this.exerciseService.update(+id, updateExerciseDto);
+    return this.exerciseService.update(id, updateExerciseDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.exerciseService.remove(+id);
+  remove(@Param('id') id: string) {
+    return this.exerciseService.remove(id);
   }
 }

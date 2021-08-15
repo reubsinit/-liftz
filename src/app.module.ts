@@ -1,21 +1,23 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 import { ExerciseModule } from './model/exercise/exercise.module';
 import { RoutineModule } from './model/routine/routine.module';
+import { object, string, number } from 'joi';
+import { DatabaseModule } from './db/database.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5431,
-      username: 'liftz_user',
-      password: '&fdsknj!sdfnj_3NB',
-      database: 'liftz_db',
-      logging: true,
-      autoLoadEntities: true,
-      synchronize: true,
+    ConfigModule.forRoot({
+      validationSchema: object({
+        POSTGRES_HOST: string().required(),
+        POSTGRES_PORT: number().required(),
+        POSTGRES_USER: string().required(),
+        POSTGRES_PASSWORD: string().required(),
+        POSTGRES_DB: string().required(),
+        PORT: number(),
+      }),
     }),
+    DatabaseModule,
     ExerciseModule,
     RoutineModule,
   ],

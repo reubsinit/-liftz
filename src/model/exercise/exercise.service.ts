@@ -19,18 +19,36 @@ export class ExerciseService {
     return await this.exerciseRepository.save(createExerciseDto);
   }
 
-  async update(
+  async onUpdateOfRoutines(
     id: number,
     updateExerciseDto: UpdateExerciseDto,
   ): Promise<Exercise> {
+    const exercise = await this.exerciseRepository.findOne(id);
+
     const routines = await this.routineRepository.findByIds(
       updateExerciseDto.routines,
     );
-    const exercise = await this.exerciseRepository.findOne(id);
 
-    exercise.routines = routines;
+    return await this.exerciseRepository.save({
+      ...exercise,
+      ...updateExerciseDto,
+      routines,
+    });
+  }
 
-    return await this.exerciseRepository.save(exercise);
+  async update(
+    id: number,
+    updateExerciseDto: UpdateExerciseDto,
+  ): Promise<UpdateResult | Exercise> {
+    if (updateExerciseDto.routines) {
+      try {
+        return await this.onUpdateOfRoutines(id, updateExerciseDto);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      return await this.exerciseRepository.update(id, updateExerciseDto);
+    }
   }
 
   findAll(): Promise<Exercise[]> {

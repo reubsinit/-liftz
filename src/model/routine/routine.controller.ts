@@ -26,12 +26,12 @@ export class RoutineController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateRoutineDto: UpdateRoutineDto) {
-    return this.routineService.update(+id, updateRoutineDto);
+  update(@Param('id') id: string, @Body() updateRoutineDto: UpdateRoutineDto) {
+    return this.routineService.update(id, updateRoutineDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.routineService.remove(+id);
+  remove(@Param('id') id: string) {
+    return this.routineService.remove(id);
   }
 }

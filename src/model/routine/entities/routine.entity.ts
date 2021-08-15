@@ -9,8 +9,8 @@ import { Exercise } from '../../exercise/entities/exercise.entity';
 
 @Entity()
 export class Routine {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;

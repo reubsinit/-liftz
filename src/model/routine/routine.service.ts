@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { Routine } from './entities/routine.entity';
 import { CreateRoutineDto } from './dto/create-routine.dto';
+import { UpdateRoutineDto } from './dto/update-routine.dto';
 
 @Injectable()
 export class RoutineService {
@@ -15,6 +16,13 @@ export class RoutineService {
     return await this.routineRepository.save(createRoutineDto);
   }
 
+  async update(
+    id: number,
+    updateTestDto: UpdateRoutineDto,
+  ): Promise<UpdateResult> {
+    return await this.routineRepository.update(id, updateTestDto);
+  }
+
   findAll(): Promise<Routine[]> {
     return this.routineRepository.find({ relations: ['exercises'] });
   }
@@ -23,7 +31,7 @@ export class RoutineService {
     return this.routineRepository.findOne(id);
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: number): Promise<void> {
     await this.routineRepository.delete(id);
   }
 }

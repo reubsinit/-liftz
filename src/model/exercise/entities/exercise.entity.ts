@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
-import { Routine } from 'src/model/routine/entities/routine.entity';
+import { Routine } from '../../routine/entities/routine.entity';
 
 @Entity()
 export class Exercise {

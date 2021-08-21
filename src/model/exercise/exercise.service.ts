@@ -24,7 +24,6 @@ export class ExerciseService {
     updateExerciseDto: UpdateExerciseDto,
   ): Promise<Exercise> {
     const exercise = await this.exerciseRepository.findOne(id);
-
     const routines = await this.routineRepository.findByIds(
       updateExerciseDto.routines,
     );

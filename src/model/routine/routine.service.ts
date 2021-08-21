@@ -40,14 +40,10 @@ export class RoutineService {
     id: string,
     updateRoutineDto: UpdateRoutineDto,
   ): Promise<Routine | UpdateResult> {
-    try {
-      if (updateRoutineDto.exercises) {
-        return await this.onUpdateOfExercises(id, updateRoutineDto);
-      } else {
-        return await this.routineRepository.update(id, updateRoutineDto);
-      }
-    } catch (error) {
-      console.error(error);
+    if (updateRoutineDto.exercises) {
+      return await this.onUpdateOfExercises(id, updateRoutineDto);
+    } else {
+      return await this.routineRepository.update(id, updateRoutineDto);
     }
   }
 

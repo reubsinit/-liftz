@@ -4,6 +4,8 @@ import { ExerciseModule } from './model/exercise/exercise.module';
 import { RoutineModule } from './model/routine/routine.module';
 import { object, string, number } from 'joi';
 import { DatabaseModule } from './db/database.module';
+import { ExceptionsLoggerFilter } from './utils/exceptionsLogger.filter';
+import { APP_FILTER } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -20,6 +22,12 @@ import { DatabaseModule } from './db/database.module';
     DatabaseModule,
     ExerciseModule,
     RoutineModule,
+  ],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: ExceptionsLoggerFilter,
+    },
   ],
 })
 export class AppModule {}

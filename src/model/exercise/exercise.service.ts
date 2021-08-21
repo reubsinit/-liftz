@@ -40,14 +40,10 @@ export class ExerciseService {
     id: string,
     updateExerciseDto: UpdateExerciseDto,
   ): Promise<UpdateResult | Exercise> {
-    try {
-      if (updateExerciseDto.routines) {
-        return await this.onUpdateOfRoutines(id, updateExerciseDto);
-      } else {
-        return await this.exerciseRepository.update(id, updateExerciseDto);
-      }
-    } catch (error) {
-      console.error(error);
+    if (updateExerciseDto.routines) {
+      return await this.onUpdateOfRoutines(id, updateExerciseDto);
+    } else {
+      return await this.exerciseRepository.update(id, updateExerciseDto);
     }
   }
 
